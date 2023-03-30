@@ -1,36 +1,43 @@
 <script>
   const choices = ["rock", "paper", "scissors"];
-
+  let roundWinner = ""
   function getComputerChoice() {
     return choices[Math.floor(Math.random() * choices.length)];
   }
 
   function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase()
+    roundWinner = ""
     if (playerSelection === computerSelection) {
         return `It's a tie, you both chose ${computerSelection}!`
     }
 
     if (computerSelection === "rock") {
             if (playerSelection === "paper") {
+                roundWinner = "player";
                 return `You win, ${playerSelection} beats ${computerSelection}!`
             } else if (playerSelection === "scissors") {
+                roundWinner = "computer";
                 return `You lose, ${playerSelection} is beaten by ${computerSelection}!`
             }
         }
 
     if (computerSelection === "paper") {
         if (playerSelection === "scissors") {
+            roundWinner = "player";
             return `You win, ${playerSelection} beats ${computerSelection}!`
         } else if (playerSelection === "rock") {
+            roundWinner = "computer";
             return `You lose, ${playerSelection} is beaten by ${computerSelection}!`
         }
     } 
 
     if (computerSelection === "scissors") {
         if (playerSelection === "rock") {
+            roundWinner = "player";
             return `You win, ${playerSelection} beats ${computerSelection}!`
         } else if (playerSelection === "paper") {
+            roundWinner = "computer";
             return `You lose, ${playerSelection} is beaten by ${computerSelection}!`
         }
     } 
@@ -38,5 +45,33 @@
     return "Wrong input, please choose 'rock', 'paper' or 'scissors'."
 
   } 
+
+  function game(rounds) {
+    let playerScore = 0;
+    let computerScore = 0;
+
+    for (let round = 1; round <= rounds; round++) {
+        let playerSelection = prompt("what's your choice? (rock, paper, scissors)", "")
+        let computerSelection = getComputerChoice()
+        playRound(playerSelection, computerSelection)
+        if (roundWinner) {
+            roundWinner === "player" ? playerScore++ : computerScore++;
+            console.log(`${playerSelection} vs ${computerSelection}! This round winner is ${roundWinner}.`)
+        } else {
+            console.log(`${playerSelection} vs ${computerSelection}, it's a tie!`)
+        }
+        console.log(`The score is ${playerScore} to ${computerScore}`)
+        
+    }
+    
+    if (playerScore > computerScore) {
+        return `You win the game ${playerScore} to ${computerScore}!`
+    } else if (playerScore < computerScore) {
+        return `You lose the game ${playerScore} to ${computerScore}!`
+    } else {
+        return `It's a tie! ${playerScore} to ${computerScore}`
+    }
+    
+  }
   
 </script>
