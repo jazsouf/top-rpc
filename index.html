@@ -1,7 +1,42 @@
 <script>
-  choices = ["rock", "paper", "scissors"];
+  const choices = ["rock", "paper", "scissors"];
 
   function getComputerChoice() {
-      return choices[Math.floor(Math.random() * choices.length)];
+    return choices[Math.floor(Math.random() * choices.length)];
   }
+
+  function playRound(playerSelection, computerSelection) {
+    playerSelection = playerSelection.toLowerCase()
+    if (playerSelection === computerSelection) {
+        return `It's a tie, you both chose ${computerSelection}!`
+    }
+
+    if (computerSelection === "rock") {
+            if (playerSelection === "paper") {
+                return `You win, ${playerSelection} beats ${computerSelection}!`
+            } else if (playerSelection === "scissors") {
+                return `You lose, ${playerSelection} is beaten by ${computerSelection}!`
+            }
+        }
+
+    if (computerSelection === "paper") {
+        if (playerSelection === "scissors") {
+            return `You win, ${playerSelection} beats ${computerSelection}!`
+        } else if (playerSelection === "rock") {
+            return `You lose, ${playerSelection} is beaten by ${computerSelection}!`
+        }
+    } 
+
+    if (computerSelection === "scissors") {
+        if (playerSelection === "rock") {
+            return `You win, ${playerSelection} beats ${computerSelection}!`
+        } else if (playerSelection === "paper") {
+            return `You lose, ${playerSelection} is beaten by ${computerSelection}!`
+        }
+    } 
+
+    return "Wrong input, please choose 'rock', 'paper' or 'scissors'."
+
+  } 
+  
 </script>
